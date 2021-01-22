@@ -19,7 +19,7 @@ manual steps on ubuntu
 	echo "eula=true" > eula.txt
 
 	# re-run the Minecraft server command
-	sudo java -Xmx1024M -Xms1024M -jar /usr/games/minecraft/minecraft_server.1.16.4.jar nogui
+	sudo java -Xmx1024M -Xms1024M -jar /usr/games/minecraft/minecraft_server.1.16.5.jar nogui
 
 resources:
 	https://aws.amazon.com/getting-started/hands-on/run-your-own-minecraft-server/
@@ -28,13 +28,23 @@ resources:
 install git
 	sudo apt install git-all
 
+#build Dockerfile
 sudo docker build -t nonoysuguitan/minecraft:0.0.1 .
 
+#Run container from image
 sudo docker run -itd -p 25565:25565 <DOCKER_TAG_ID>
 
-sudo docker exec -it <DOCKER_TAG_ID> /bin/bash
+#output container logs
+sudo docker logs <CONTAINER_ID>
+
+#On the minecraft application, connect via IP_ADDR:25565
+
+#if you need to go into the container
+sudo docker exec -it <CONTAINER_ID> /bin/bash
 
 
 
 TODO:
 -auto update, get the latest minecraft version? or at least have the user pass in the minecraft version
+
+-clean up hardcoded versions in dockerfile
