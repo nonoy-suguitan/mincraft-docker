@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 
-RUN apt -y update && apt -y install default-jre screen
+RUN apt -y update \
+ && apt -y install default-jre screen wget
 
 RUN mkdir /usr/games/minecraft
 

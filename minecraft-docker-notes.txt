@@ -33,3 +33,8 @@ sudo docker build -t nonoysuguitan/minecraft:0.0.1 .
 sudo docker run -itd -p 25565:25565 <DOCKER_TAG_ID>
 
 sudo docker exec -it <DOCKER_TAG_ID> /bin/bash
+
+
+
+TODO:
+-auto update, get the latest minecraft version? or at least have the user pass in the minecraft version
