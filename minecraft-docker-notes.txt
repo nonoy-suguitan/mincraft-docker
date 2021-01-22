@@ -42,9 +42,13 @@ sudo docker logs <CONTAINER_ID>
 #if you need to go into the container
 sudo docker exec -it <CONTAINER_ID> /bin/bash
 
-
+#publish to dockerhub
+sudo docker login
+sudo docker push nonoysuguitan/minecraft:0.0.1
 
 TODO:
 -auto update, get the latest minecraft version? or at least have the user pass in the minecraft version
 
 -clean up hardcoded versions in dockerfile
+
+-potentially use apline to make the image size smaller?
