@@ -18,6 +18,8 @@ sudo add-apt-repository \
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 
+sudo usermod -a -G docker cloud_user
+
 sudo docker run hello-world
 sudo docker ps
 sudo docker images

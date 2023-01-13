@@ -2,6 +2,11 @@ launching ec2 instance specs
 	-use ubuntu
 	-add custom TCP rule , port range 25565
 
+Pre-reqs on amazon linux 2
+    1  sudo rpm --import https://yum.corretto.aws/corretto.key
+    2  sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
+    3  sudo yum install -y java-17-amazon-corretto-devel
+
 manual steps on ubuntu
 	sudo apt -y update && sudo apt -y install default-jre screen
 
@@ -10,16 +15,26 @@ manual steps on ubuntu
 	# get latest server file at https://www.minecraft.net/en-us/download/server
 	#this link is for minecraft version 1.16.5
 	sudo wget -O minecraft_server.1.16.5.jar https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar
-	sudo java -Xmx1024M -Xms1024M -jar minecraft_server.1.16.5.jar nogui
+	sudo wget -O minecraft_server.1.19.2.jar https://piston-data.mojang.com/v1/objects/f69c284232d7c7580bd89a5a4931c3581eae1378/server.jar
+	sudo java -Xmx2048M -Xms2048M -jar minecraft_server.1.19.2.jar nogui
 
 	# change ownership of eula.txt
 	sudo chown ubuntu eula.txt
 
 	# accept the EULA
-	echo "eula=true" > eula.txt
+	sudo echo "eula=true" > /usr/games/minecraft/eula.txt
 
 	# re-run the Minecraft server command
-	sudo java -Xmx1024M -Xms1024M -jar /usr/games/minecraft/minecraft_server.1.16.5.jar nogui
+	sudo java -Xmx2048M -Xms2048M -jar /usr/games/minecraft/minecraft_server.1.19.2.jar nogui
+
+server.properties
+  enable-command-block=true
+  allow-cheats=true
+
+/give [your username] minecraft:command_block
+/op <player>
+/time set 0
+
 
 resources:
 	https://aws.amazon.com/getting-started/hands-on/run-your-own-minecraft-server/
@@ -52,3 +67,8 @@ TODO:
 -clean up hardcoded versions in dockerfile
 
 -potentially use apline to make the image size smaller?
+
+
+
+ ssh -i "minecraft-2022-3.pem" ec2-user@ec2-54-151-121-99.us-west-1.compute.amazonaws.com
+  The minecraft-2022.pem file is attached to this message

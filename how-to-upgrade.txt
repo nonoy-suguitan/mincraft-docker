@@ -1,0 +1,14 @@
+CD into the mincraft server directory
+$ cd /usr/games/minecraft
+
+(optional) consider backup of world
+$ sudo cp -r world world-backup
+
+Download the latest minecraft server jar
+# get latest server file at https://www.minecraft.net/en-us/download/server
+#this link is for minecraft version 1.19.3
+$ sudo wget -O minecraft_server.1.19.3.jar https://piston-data.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar
+
+Start the server
+$ sudo java -Xmx2048M -Xms2048M -jar /usr/games/minecraft/minecraft_server.1.19.3.jar nogui
+

@@ -1,0 +1,8 @@
+Go to AWS Management Console > EC2 > instances
+  https://us-west-1.console.aws.amazon.com/ec2/home?region=us-west-1#Instances:
+
+Select the instance > Actions > Images and Templates > Create image
+
+Create new instance, using the newly created AMI
+
+Connect to the instance using the "ec2-user" user (it defaults to the "root" user)
