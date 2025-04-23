@@ -1,39 +1,75 @@
 launching ec2 instance specs
-	-use ubuntu
+	-use amazon linux 3
+	-t3.medium
+  -use minecraft-2022.pem
 	-add custom TCP rule , port range 25565
+    -use minecraft security group
+  -use 50GB EBS
 
-Pre-reqs on amazon linux 2
+open windows terminal, open ubuntu tab
+# Make a secure copy of the file into your Linux home directory
+cp /mnt/c/dev/projects/minecraft-docker/minecraft-2022.pem ~/
+
+# Go to your home directory
+cd ~/
+
+# Fix permissions
+chmod 400 minecraft-2022.pem
+
+# ssh
+ssh -i "minecraft-2022.pem" ec2-user@ec2-13-52-103-66.us-west-1.compute.amazonaws.com
+
+
+Pre-reqs ec2 instance
     1  sudo rpm --import https://yum.corretto.aws/corretto.key
     2  sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
-    3  sudo yum install -y java-17-amazon-corretto-devel
+    4  sudo dnf install -y java-21-amazon-corretto-devel
 
+# to delete
 manual steps on ubuntu
 	sudo apt -y update && sudo apt -y install default-jre screen
 
 	sudo mkdir /usr/games/minecraft
 	cd /usr/games/minecraft
 	# get latest server file at https://www.minecraft.net/en-us/download/server
-	#this link is for minecraft version 1.16.5
+	#this link is for minecraft version 1.21.5
 	sudo wget -O minecraft_server.1.16.5.jar https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar
-	sudo wget -O minecraft_server.1.19.2.jar https://piston-data.mojang.com/v1/objects/f69c284232d7c7580bd89a5a4931c3581eae1378/server.jar
-	sudo java -Xmx2048M -Xms2048M -jar minecraft_server.1.19.2.jar nogui
+	sudo wget -O minecraft_server.1.21.5.jar https://piston-data.mojang.com/v1/objects/e6ec2f64e6080b9b5d9b471b291c33cc7f509733/server.jar
+	sudo wget -O minecraft_server.1.20.1.jar https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar
+	sudo java -Xmx3000M -Xms3000M -jar minecraft_server.1.21.5.jar nogui
+
+  # edit server.properties
+  enable-command-block=true
+  allow-cheats=true
 
 	# change ownership of eula.txt
-	sudo chown ubuntu eula.txt
+	sudo chown ec2-user eula.txt
 
 	# accept the EULA
 	sudo echo "eula=true" > /usr/games/minecraft/eula.txt
 
 	# re-run the Minecraft server command
-	sudo java -Xmx2048M -Xms2048M -jar /usr/games/minecraft/minecraft_server.1.19.2.jar nogui
+	sudo java -Xmx4096M -Xms4096M -jar /usr/games/minecraft/minecraft_server.1.20.1.jar nogui
 
-server.properties
-  enable-command-block=true
-  allow-cheats=true
 
 /give [your username] minecraft:command_block
 /op <player>
 /time set 0
+
+/give The_Nonoy minecraft:command_block
+/op The_Nonoy
+
+/give been_machine minecraft:command_block
+/op been_machine
+
+/give YM4N minecraft:command_block
+/op YM4N
+
+
+/give Kysaaah minecraft:command_block
+/op Kysaaah
+
+https://www.reddit.com/r/Minecraft/comments/vbf08j/gamma_change_not_working_in_119/
 
 
 resources:
